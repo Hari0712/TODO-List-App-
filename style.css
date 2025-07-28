@@ -1,0 +1,398 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+::-webkit-scrollbar {
+  width: 0;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Inter', sans-serif;
+  background-color: #fff;
+  color: #2e2e2e;
+}
+
+.wrapper {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  padding: 30px 0;
+}
+
+@media (min-width: 768px) {
+  .wrapper {
+    width: 25rem;
+    height: 50rem;
+    border: 10px solid #2e2e2e;
+    border-radius: 40px;
+  }
+}
+
+.screen {
+  min-width: 100%;
+  flex: 1;
+  transition: all 0.3s;
+}
+
+.wrapper.show-category .home-screen {
+  transform: translateX(-100%);
+}
+.wrapper.show-category .category-screen {
+  transform: translateX(-100%);
+}
+
+.screen-backdrop {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 135%;
+  height: 25rem;
+  background-color: #c9164b;
+  border-radius: 0 0 50% 50%;
+  z-index: -1;
+  transition: all 0.3s;
+}
+.wrapper.show-category .screen-backdrop {
+  transform: translate(-50%, -60%);
+}
+
+.head-wrapper {
+  padding: 0 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #fff;
+}
+
+.menu-btn, .back-btn {
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.welcome {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.welcome .content h1 {
+  font-size: 1.5rem;
+}
+
+.welcome .content p {
+  font-weight: 500;
+}
+
+.welcome .img {
+  position: relative;
+}
+
+.welcome .img .backdrop {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 3.8rem;
+  height: 4rem;
+  background-color: #e5e7fd;
+  border-radius: 50%;
+  z-index: -1;
+}
+
+.welcome .img img {
+  width: 5rem;
+}
+
+/* Categories */
+.categories-wrapper {
+  padding: 0 30px;
+  margin-top: 1rem;
+  height: calc(100% - 8rem);
+  overflow-y: auto;
+}
+
+.categories {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.category {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  padding: 1.5rem 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 10px 20px 5px #00000023;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.category:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px 5px #00000040;
+}
+
+.category .left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.category .left img {
+  width: 3rem;
+}
+
+.category .content h1 {
+  font-size: 1.2rem;
+}
+
+.category .content p {
+  font-size: 0.85rem;
+  opacity: 0.6;
+}
+
+/* Category Screen Details */
+.category-details {
+  padding: 0 30px;
+  margin-top: 7rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.category-details img {
+  width: 4rem;
+}
+
+.category-details .details p {
+  font-size: 0.9rem;
+  opacity: 0.6;
+}
+
+/* Tasks */
+.tasks-wrapper {
+  padding: 0 30px;
+  margin-top: 1rem;
+  height: calc(100% - 12rem);
+  overflow-y: auto;
+}
+
+.tasks {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-top: 1rem;
+}
+
+.task-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.task {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.task input {
+  display: none;
+}
+
+.task .checkmark {
+  width: 1rem;
+  height: 1rem;
+  border: 1px solid #2e2e2e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 2px;
+}
+
+.task .checkmark svg {
+  width: 1rem;
+  color: #2e2e2e;
+  opacity: 0;
+  transition: all 0.3s;
+}
+
+.task:hover .checkmark svg {
+  opacity: 1;
+}
+
+.task input:checked ~ .checkmark {
+  background-color: #2e2e2e;
+}
+
+.task input:checked ~ .checkmark svg {
+  color: #fff;
+  opacity: 1;
+}
+
+.task input:checked ~ p {
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+
+.delete {
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0,0,0,0.05);
+  border-radius: 50%;
+  color: #2e2e2e;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s;
+}
+
+.task-wrapper:hover .delete {
+  opacity: 1;
+  visibility: visible;
+}
+
+.delete:hover {
+  color: red;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.no-tasks {
+  margin-top: 5rem;
+  text-align: center;
+  font-size: 1.2rem;
+  opacity: 0.5;
+}
+
+/* Add Task Button */
+.add-task-btn {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  width: 3rem;
+  height: 3rem;
+  background-color: #39a6f0;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s;
+  z-index: 10;
+}
+
+.add-task-btn:hover {
+  transform: scale(1.1);
+}
+
+.add-task-btn.active {
+  transform: rotate(45deg);
+  bottom: 20rem;
+}
+
+/* Add Task Modal */
+.add-task {
+  position: absolute;
+  bottom: -100%;
+  left: 0;
+  width: 100%;
+  padding: 20px 30px;
+  background-color: #fff;
+  transition: all 0.3s;
+  z-index: 11;
+}
+
+.add-task.active {
+  bottom: 0;
+}
+
+.add-task .heading {
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+}
+
+.input-group {
+  margin-bottom: 20px;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.input-group input,
+.input-group select {
+  width: 100%;
+  padding: 10px;
+  font-size: 0.95rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Buttons */
+.btns {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+.btns button {
+  padding: 10px 20px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.add-btn {
+  background-color: #39a6f0;
+  color: #fff;
+}
+
+.cancel-btn {
+  background-color: #eee;
+}
+
+/* Backdrop for modal */
+.black-backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(5px);
+  background-color: rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s;
+  z-index: 5;
+}
+
+.black-backdrop.active {
+  opacity: 1;
+  visibility: visible;
+}
